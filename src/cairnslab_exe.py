@@ -1,13 +1,12 @@
 from flask import Flask, Response, request, redirect, url_for, render_template, jsonify
-from flask_socketio import SocketIO     # add 0331
-import threading                        # add 0331
+from flask_socketio import SocketIO
+import threading
 import json
 import sys
 import io
 import ctl_bluetooth as myblue
 import ctl_gpio as mygpio
 from multiprocessing import Process, Queue
-import time
 
 
 # Set up Web Server
