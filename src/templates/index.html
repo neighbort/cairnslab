@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>cairnslab</title>
+    <title>cairnslab ver1.0.0</title>
     <!--
     <script src="./node_modules/blockly/blockly_compressed.js"></script>
     <script src="./node_modules/blockly/blocks_compressed.js"></script>
@@ -15,7 +15,6 @@
     <script src="https://cdn.jsdelivr.net/npm/blockly@10.1.2/python_compressed.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/blockly@10.1.2/msg/en.js"></script>
 
-    <!--script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.7/require.js"></script-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.4/socket.io.js"></script>
     <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
 
@@ -23,12 +22,14 @@
     <script src="/static/piblock.js"></script>
     <script src="/static/piblock_block.js"> </script>
 
-    <script>
-	const socket = io();
+    <!-- ツールボックスの定義 -->
+    <script src="/static/toolbox.js"></script>
 
-	socket.on("output", (data) => {
-            console.log(data);
-        });
+    <script>
+      const socket = io();
+      socket.on("output", (data) => {
+        console.log(data);
+      });
     </script>
 
     <style>
@@ -55,7 +56,7 @@
   </head>
   <body>
     <p>
-      The Hatchbox
+      cairnslab
     </p>
     <div id="pageContainer">
       <div id="consoleDiv">
@@ -64,8 +65,8 @@
           <!--button onclick="run_python()">Run on Rpi test mode</button-->
           <button onclick="sendCode()">Run on Rpi</button>
           <button onclick="terminateCode()">Terminate</button>
-	</p>
-	<p>
+        </p>
+        <p>
           <button onclick="saveBlock()">Save Block</button>
           <button onclick="loadBlock()">Open Block</button>
         </p>
@@ -75,12 +76,13 @@
           <ul id="paired-list"></ul>
         </p>
         <h3>Console Output:</h3>
-	<pre id="output">(Console will appear here...)</pre>
+        <pre id="output">(Console will appear here...)</pre>
       </div>
       <div id="blocklyDiv"></div>
     </div>
 
     <script>
+      /*
       var toolbox = {
         kind: 'categoryToolbox',
         contents: [
@@ -109,18 +111,18 @@
                 kind: 'block',
                 type: 'logic_boolean',
               },
-	      {
-		kind: 'block',
-		type: 'logic_null',
-	      },
-	      {
-		kind: 'block',
-		type: 'logic_ternary',
-	      },
-	      {
-		kind: 'block',
-		type: 'class4logic',
-	      },
+	            {
+		            kind: 'block',
+		            type: 'logic_null',
+	            },
+	            {
+		            kind: 'block',
+		            type: 'logic_ternary',
+	            },
+	            {
+		            kind: 'block',
+		            type: 'class4logic',
+	            },
             ],
           },
           {
@@ -176,10 +178,10 @@
                   },
                 },
               },
-	      {
-		kind: 'block',
-		type: 'controls_forEach',
-	      },
+      	      {
+		            kind: 'block',
+		            type: 'controls_forEach',
+	            },
               {
                 kind: 'block',
                 type: 'controls_flow_statements'
@@ -283,147 +285,147 @@
                 kind: 'block',
                 type: 'text_print',
               },
-	      {
-		kind: 'block',
-		type: 'typeof_var',
-	      },
+      	      {
+		            kind: 'block',
+		            type: 'typeof_var',
+	            },
             ],
           },
-	  {
-	    kind: 'category',
-	    name: 'Lists',
-	    categorystyle: 'list_category',
-	    contents: [
-	      {
-		kind: 'block',
-		type: 'lists_create_with',
-	      },
-	      {
-          	kind: 'block',
-          	type: 'lists_repeat',
-          	inputs: {
-            	  NUM: {
+      	  {
+	          kind: 'category',
+	          name: 'Lists',
+	          categorystyle: 'list_category',
+	          contents: [
+	            {
+		            kind: 'block',
+		            type: 'lists_create_with',
+	            },
+	            {
+          	    kind: 'block',
+          	    type: 'lists_repeat',
+          	    inputs: {
+            	    NUM: {
               	    shadow: {
                       type: 'math_number',
                       fields: {
-                  	NUM: 5,
+                  	    NUM: 5,
                       },
                     },
                   },
                 },
               },
-	      {
-		kind: 'block',
-		type: 'lists_length',
-	      },
-	      {
-		kind: 'block',
-		type: 'lists_sort',
-	      },
-	      {
-		kind: 'block',
-		type: 'lists_reverse',
-	      },
-	      {
-		kind: 'block',
-		type: 'get_listelem',
-	      },
-	    ],
-	  },
-	  {
-	    kind: 'category',
-	    name: 'Excutables',
-	    categorystyle: 'text_category',
-	    contents: [
-	      {
-		kind: 'block',
-		type: 'text_print',
-	      },
-	      {
-		kind: 'block',
-		type: 'sleep'
-	      },
-	      {
-		kind: 'block',
-		type: 'do_nothing',
-	      },
-	    ],
-	  },
+	            {
+            		kind: 'block',
+		            type: 'lists_length',
+	            },
+	            {
+		            kind: 'block',
+		            type: 'lists_sort',
+	            },
+	            {
+		            kind: 'block',
+		            type: 'lists_reverse',
+	            },
+	            {
+		            kind: 'block',
+		            type: 'get_listelem',
+	            },
+	          ],
+      	  },
+	        {
+	          kind: 'category',
+      	    name: 'Excutables',
+	          categorystyle: 'text_category',
+	          contents: [
+	            {
+		            kind: 'block',
+		            type: 'text_print',
+              },
+              {
+                kind: 'block',
+                type: 'sleep'
+              },
+              {
+                kind: 'block',
+                type: 'do_nothing',
+      	      },
+	          ],
+	        },
           {
             kind: 'category',
             name: 'Variables',
             categorystyle: 'variable_category',
             custom: 'VARIABLE',
           },
-	  {
-	    kind: 'category',
-      	    name: 'Functions',
-            categorystyle: 'procedure_category',
-            custom: 'PROCEDURE',
-	  },
+      	  {
+	          kind: 'category',
+              name: 'Functions',
+              categorystyle: 'procedure_category',
+              custom: 'PROCEDURE',
+	        },
           {
             kind: 'category',
             name: 'RPi',
             categorystyle: 'text_category',
             contents: [
-	      {
+	            { 
                 kind: 'block',
-		type: 'gpio_out_ctl',
-	      },
-	      {
-		kind: 'block',
-		type: 'gpio_set_read',
-	      },
-	      {
-		kind: 'block',
-		type: 'gpio_read_status',
-	      },
-	      {
-		kind: 'block',
-		type: 'gpio_pwm_ctl',
-	      },
-	      {
-		kind: 'block',
-		type: 'gpio_servo_ctl',
-	      },
+		            type: 'gpio_out_ctl',
+              },
+              {
+                kind: 'block',
+                type: 'gpio_set_read',
+              },
+              {
+                kind: 'block',
+                type: 'gpio_read_status',
+              },
+              {
+                kind: 'block',
+                type: 'gpio_pwm_ctl',
+              },
+              {
+                kind: 'block',
+                type: 'gpio_servo_ctl',
+      	      },
             ],
           },
-	  {
-	    kind: 'category',
-	    name: 'JoyCon',
-	    categorystyle: 'text_category',
-	    contents: [
-	      {
-		kind: 'block',
-		type: 'my_PiController',
-	      },
-	      {
-		kind: 'block',
-		type: 'cmd_distributor',
-	      },
-	      {
-		kind: 'block',
-		type: 'button_handler_joyconR',
-	      },
-	      {
-		kind: 'block',
-		type: 'buton_handler_joyconL',
-	      },
-	      {
-		kind: 'block',
-		type: 'button_value',
-	      },
-	      {
-		kind: 'block',
-		type: 'joystick_value',
-	      },
-	    ],
-	  },
+	        {
+            kind: 'category',
+            name: 'JoyCon',
+            categorystyle: 'text_category',
+            contents: [
+	            {
+                kind: 'block',
+                type: 'my_PiController',
+              },
+              {
+                kind: 'block',
+                type: 'cmd_distributor',
+              },
+              {
+                kind: 'block',
+                type: 'button_handler_joyconR',
+              },
+              {
+                kind: 'block',
+                type: 'buton_handler_joyconL',
+              },
+              {
+                kind: 'block',
+                type: 'button_value',
+              },
+              {
+                kind: 'block',
+                type: 'joystick_value',
+      	      },
+	          ],
+	        },
         ],
       };
+      */
 
       var demoWorkspace = Blockly.inject('blocklyDiv', {
-//        media: './node_modules/blockly/media/',
         toolbox: toolbox,
       });
 
@@ -433,16 +435,16 @@
           blocks: [
             {
               type: 'text_print',
-	      inputs: {
-		TEXT: {
-		  block: {
-		    type: 'text',
-		    fields: {
-		      TEXT: "Hello World!",
-		    },
-		  },
-		},
-	      },
+              inputs: {
+                TEXT: {
+                  block: {
+                    type: 'text',
+                    fields: {
+                      TEXT: "Hello World!",
+                    },
+                  },
+                },
+              },
             },
           ],
         },
@@ -451,44 +453,42 @@
 
       function showCode() {
         // Generate JavaScript code and display it.
-	python.pythonGenerator.INFINITE_LOOP_TRAP = null;
-	  var code =
-	    python.pythonGenerator.workspaceToCode(demoWorkspace);
+      	python.pythonGenerator.INFINITE_LOOP_TRAP = null;
+	      var code =
+	      python.pythonGenerator.workspaceToCode(demoWorkspace);
         alert(code);
       }
 
       function run_python() {
-	python.pythonGenerator.INFINITE_LOOP_TRAP = null;
-	var code =
-	  python.pythonGenerator.workspaceToCode(demoWorkspace);
-	console.log(code);
-	fetch(`/jsonrpi`, {
+        python.pythonGenerator.INFINITE_LOOP_TRAP = null;
+        var code = python.pythonGenerator.workspaceToCode(demoWorkspace);
+        console.log(code);
+        fetch(`/jsonrpi`, {
           method: 'POST',
-	  headers: {
-                        'Content-Type': 'application/json'
-                    },
-	  body: JSON.stringify(code)
-          })
-	  .then(response => response.text())
-	  .then(data => console.log(data))
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(code)
+        })
+        .then(response => response.text())
+        .then(data => console.log(data))
       }
 
-        function sendCode() {
-            	python.pythonGenerator.INFINITE_LOOP_TRAP = null;
-		var code =
-          	  python.pythonGenerator.workspaceToCode(demoWorkspace);
-		socket.emit('run_code', code);
-        }
+      function sendCode() {
+        python.pythonGenerator.INFINITE_LOOP_TRAP = null;
+		    var code = python.pythonGenerator.workspaceToCode(demoWorkspace);
+		    socket.emit('run_code', code);
+      }
 
-	socket.on("output", (data) => {
-		const outputElem = document.getElementById("output");
+    	socket.on("output", (data) => {
+		    const outputElem = document.getElementById("output");
     		outputElem.textContent += data.message + "\n";
     		outputElem.scrollTop = outputElem.scrollHeight;  // auto-scroll
-  	});
+  	  });
 
-	function terminateCode() {
+    	function terminateCode() {
     		socket.emit("stop_code");
-	}
+	    }
 
       async function saveBlock(){
         const opts = {
@@ -530,58 +530,52 @@
         const devices = await res.json();
         const list = document.getElementById("paired-list");
         list.innerHTML = "";
-
         devices.forEach(device => {
         const item = document.createElement("li");
         item.textContent = `${device.name} [${device.mac}] `;
-
         const connectBtn = document.createElement("button");
         connectBtn.textContent = "接続";
         connectBtn.onclick = () => connect(device.mac);
         item.appendChild(connectBtn);
-
         const disconnectBtn = document.createElement("button");
         disconnectBtn.textContent = "切断";
         disconnectBtn.onclick = () => disconnect(device.mac);
         item.appendChild(disconnectBtn);
-
         const removeBtn = document.createElement("button");
         removeBtn.textContent = "削除";
         removeBtn.onclick = () => remove(device.mac);
         item.appendChild(removeBtn);
-
         list.appendChild(item);
         });
       }
 
-
       async function ConnJoyCon() {
-	alert('make Joy-Con stand-by mode');
-	const outputElem = document.getElementById("output");
-	outputElem.textContent += "\n" + "scannning Joy-Con... ";
-	const res = await fetch("/scan-connect", {
-	  method: "POST",
-	  headers: { "Content-Type": "application/json"},
-	});
-	const result = await res.json();
-	console.log(result.result || result.error);
-	outputElem.textContent += result.result || result.error;
-	outputElem.scrollTop = outputElem.scrollHeight;
+        alert('make Joy-Con stand-by mode');
+        const outputElem = document.getElementById("output");
+        outputElem.textContent += "\n" + "scannning Joy-Con... ";
+        const res = await fetch("/scan-connect", {
+          method: "POST",
+          headers: { "Content-Type": "application/json"},
+        });
+        const result = await res.json();
+        console.log(result.result || result.error);
+        outputElem.textContent += result.result || result.error;
+        outputElem.scrollTop = outputElem.scrollHeight;
       }
 
       async function connect(mac) {
-	alert('make device stand-by mode');
+	      alert('make device stand-by mode');
         const outputElem = document.getElementById("output");
-	outputElem.textContent += "\n" + "scanning Joy-Con... ";
-	const res = await fetch("/connect", {
+        outputElem.textContent += "\n" + "scanning Joy-Con... ";
+        const res = await fetch("/connect", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ mac: mac })
         });
         const result = await res.json();
         console.log(result.result || result.error);
-	outputElem.textContent += result.result || result.error;
-	outputElem.scrollTop = outputElem.scrollHeight;
+        outputElem.textContent += result.result || result.error;
+        outputElem.scrollTop = outputElem.scrollHeight;
       }
 
       async function disconnect(mac) {
@@ -592,9 +586,9 @@
         });
         const result = await res.json();
         console.log(result.result || result.error);
-	const outputElem = document.getElementById("output");
-	outputElem.textContent += result.result || result.error;
-	outputElem.scrollTop = outputElem.scrollHeight;
+        const outputElem = document.getElementById("output");
+        outputElem.textContent += result.result || result.error;
+        outputElem.scrollTop = outputElem.scrollHeight;
       }
 
       async function remove(mac) {
@@ -606,8 +600,8 @@
         const result = await res.json();
         console.log(result.result || result.error);
         const outputElem = document.getElementById("output");
-	outputElem.textContent += result.result || result.error;
-	outputElem.scrollTop = outputElem.scrollHeight;
+        outputElem.textContent += result.result || result.error;
+        outputElem.scrollTop = outputElem.scrollHeight;
         getPaired(); // リストを更新
       }
 

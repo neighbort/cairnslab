@@ -36,9 +36,9 @@ Blockly.common.defineBlocks({class4logic: class4logic});
 const get_listelem = {
   init: function() {
     this.appendValueInput('list')
-    .setCheck('Array')
-      .appendField(new Blockly.FieldNumber(0), 'index')
-      .appendField('th element of');
+      .setCheck('Array')
+        .appendField(new Blockly.FieldNumber(0), 'index')
+          .appendField('th element of');
     this.setOutput(true, null);
     this.setTooltip('');
     this.setHelpUrl('');
@@ -63,9 +63,9 @@ const gpio_out_ctl = {
   init: function() {
     this.appendDummyInput('explanation')
       .appendField('set GPIO No. ')
-      .appendField(new Blockly.FieldNumber(0, 0, 27), 'pin')
-      .appendField('to output ')
-      .appendField(new Blockly.FieldDropdown([
+        .appendField(new Blockly.FieldNumber(0, 0, 27), 'pin')
+        .appendField('to output ')
+        .appendField(new Blockly.FieldDropdown([
           ['high', '1'],
           ['low', '0']
         ]), 'gpioval');
@@ -82,9 +82,9 @@ const gpio_set_read = {
   init: function() {
     this.appendDummyInput('explanation')
       .appendField('set GPIO No. ')
-      .appendField(new Blockly.FieldNumber(0, 0, 27), 'pin')
-      .appendField('reading mode')
-      .appendField(new Blockly.FieldDropdown([
+        .appendField(new Blockly.FieldNumber(0, 0, 27), 'pin')
+        .appendField('reading mode')
+        .appendField(new Blockly.FieldDropdown([
           ['high', '1'],
           ['low', '0']
         ]), 'pud');
@@ -101,7 +101,7 @@ const gpio_read_status = {
   init: function() {
     this.appendDummyInput('explanation')
       .appendField('status of GPIO pin')
-      .appendField(new Blockly.FieldNumber(12, 0, 27), 'pin');
+        .appendField(new Blockly.FieldNumber(12, 0, 27), 'pin');
     this.setOutput(true, null);
     this.setTooltip('');
     this.setHelpUrl('');
@@ -115,7 +115,7 @@ const gpio_pwm_ctl = {
     this.appendValueInput('duty')
     .setCheck('Number')
       .appendField('set  GPIO No. ')
-      .appendField(new Blockly.FieldDropdown([
+        .appendField(new Blockly.FieldDropdown([
           ['12(PWM0)', '12'],
           ['18(PWM0)', '18'],
           ['13(PWM1)', '13']
