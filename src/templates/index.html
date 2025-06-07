@@ -26,12 +26,12 @@
     <script src="/static/toolbox.js"></script>
     <script src="/static/startblocks.js"></script>
 
-    <script>
+    <!--script>
       const socket = io();
       socket.on("output", (data) => {
         console.log(data);
       });
-    </script>
+    </script-->
 
     <style>
       body {
@@ -55,6 +55,8 @@
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   </head>
+
+
   <body>
     <p>
       cairnslab
@@ -83,34 +85,16 @@
     </div>
 
     <script>
-
       var demoWorkspace = Blockly.inject('blocklyDiv', {
         toolbox: toolbox,
       });
 
-      /*
-      var startBlocks = {
-        blocks: {
-          languageVersion: 0,
-          blocks: [
-            {
-              type: 'text_print',
-              inputs: {
-                TEXT: {
-                  block: {
-                    type: 'text',
-                    fields: {
-                      TEXT: "Hello World!",
-                    },
-                  },
-                },
-              },
-            },
-          ],
-        },
-      };
-      */
       Blockly.serialization.workspaces.load(startBlocks, demoWorkspace);
+
+      const socket = io();
+      socket.on("output", (data) => {
+        console.log(data);
+      });
 
       function showCode() {
         // Generate JavaScript code and display it.
