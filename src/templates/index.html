@@ -226,15 +226,15 @@
         const item = document.createElement("li");
         item.textContent = `${device.name} [${device.mac}] `;
         const connectBtn = document.createElement("button");
-        connectBtn.textContent = "接続";
+        connectBtn.textContent = "Connect";
         connectBtn.onclick = () => connect(device.mac);
         item.appendChild(connectBtn);
         const disconnectBtn = document.createElement("button");
-        disconnectBtn.textContent = "切断";
+        disconnectBtn.textContent = "Disconnect";
         disconnectBtn.onclick = () => disconnect(device.mac);
         item.appendChild(disconnectBtn);
         const removeBtn = document.createElement("button");
-        removeBtn.textContent = "削除";
+        removeBtn.textContent = "Remove";
         removeBtn.onclick = () => remove(device.mac);
         item.appendChild(removeBtn);
         list.appendChild(item);
@@ -280,7 +280,7 @@
         const outputElem = document.getElementById("output");
         outputElem.textContent += result.result || result.error;
         outputElem.scrollTop = outputElem.scrollHeight;
-        getPaired(); // リストを更新
+        getPaired(); // list update
       }
 
     </script>

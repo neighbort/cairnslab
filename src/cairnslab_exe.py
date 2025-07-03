@@ -14,7 +14,6 @@ socketio = SocketIO(app, cors_allowed_origins="*", async_mode="threading")  # ad
 
 current_process = None
 
-
 @app.route('/', methods=['GET', 'POST'])
 def index():
     return render_template('index.html')
