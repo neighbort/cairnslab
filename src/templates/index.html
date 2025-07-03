@@ -3,6 +3,9 @@
   <head>
     <meta charset="utf-8" />
     <title>cairnslab ver1.0.0</title>
+
+    <!-- Blockly package instalation: -->
+    <!-- To Do: Better to use npm package, currently use cdn -->
     <!--
     <script src="./node_modules/blockly/blockly_compressed.js"></script>
     <script src="./node_modules/blockly/blocks_compressed.js"></script>
@@ -14,25 +17,21 @@
     <script src="https://cdn.jsdelivr.net/npm/blockly@10.1.2/javascript_compressed.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/blockly@10.1.2/python_compressed.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/blockly@10.1.2/msg/en.js"></script>
-
+    <!-- io/socket package instalation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.4/socket.io.js"></script>
     <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
 
-    <!-- 自作ブロックの定義 -->
+    <!-- Original block instalation -->
     <script src="/static/piblock.js"></script>
     <script src="/static/piblock_block.js"> </script>
 
-    <!-- ツールボックスの定義、初期ブロック -->
+    <!-- Toolbox and Start Block instalation for Blockly Workspace -->
     <script src="/static/toolbox.js"></script>
     <script src="/static/startblocks.js"></script>
 
-    <!--script>
-      const socket = io();
-      socket.on("output", (data) => {
-        console.log(data);
-      });
-    </script-->
-
+    <!-- Define html style for Ouotput Console -->
+    <!-- To Do: Output Console color is not up to date style, need improvement -->
+    <!-- To Do: Style text must put out to /static/css/style.css -->
     <style>
       body {
         background-color: #fff;
@@ -53,6 +52,7 @@
       }
     </style>
 
+    <!-- Define css style sheet -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   </head>
 
@@ -61,50 +61,63 @@
     <p>
       cairnslab
     </p>
+
+    <!-- Layout -->
     <div id="pageContainer">
       <div id="consoleDiv">
         <p>
+          <!-- Buttons to show/run/terminate programm coded by Blockly -->
+          <!-- To Do: Improve button design to tell function from it -->
+          <!-- To Do: Positions of show/run/terminate/save/load may be better at near Workspace -->
+          <!-- To Do: Function names and Button indications don't replesents its role directly, need update -->
           <button onclick="showCode()">Show Python Code</button>
-          <!--button onclick="run_python()">Run on Rpi test mode</button-->
           <button onclick="sendCode()">Run on Rpi</button>
           <button onclick="terminateCode()">Terminate</button>
+          <!-- CAUSION: use following "run_python()" for test or debug only -->
+          <!--button onclick="run_python()">Run on Rpi test mode</button-->
         </p>
         <p>
+          <!-- Buttons to save/load Block -->>
           <button onclick="saveBlock()">Save Block</button>
           <button onclick="loadBlock()">Open Block</button>
         </p>
         <p>
+          <!-- Buttons related to bluetooth control -->
           <button onclick="ConnJoyCon()"> Register JoyCon</button>
           <button onclick="getPaired()"> Paired Devices</button>
           <ul id="paired-list"></ul>
         </p>
+        <!-- Output Console -->
         <h3>Console Output:</h3>
         <pre id="output">(Console will appear here...)</pre>
       </div>
+      <!-- Blockly workspace -->>
       <div id="blocklyDiv"></div>
     </div>
 
     <script>
+      // inject toolbox to Blockly Workspace
       var demoWorkspace = Blockly.inject('blocklyDiv', {
         toolbox: toolbox,
       });
 
+      // inject start blocks to the Blocky Workspace
       Blockly.serialization.workspaces.load(startBlocks, demoWorkspace);
 
+      // setup socket io to show raspberry pi stdout on the Output Console real time  
       const socket = io();
-      socket.on("output", (data) => {
-        console.log(data);
-      });
 
       function showCode() {
-        // Generate JavaScript code and display it.
+        // Generate Python code based on Block in the Workspace and display it.
       	python.pythonGenerator.INFINITE_LOOP_TRAP = null;
 	      var code =
 	      python.pythonGenerator.workspaceToCode(demoWorkspace);
         alert(code);
       }
 
+      // CAUSION: use "sendCode()" instead of this function
       function run_python() {
+        // run "code" on RPi, the "code" output is handed from RPi to client after "code" implementred
         python.pythonGenerator.INFINITE_LOOP_TRAP = null;
         var code = python.pythonGenerator.workspaceToCode(demoWorkspace);
         console.log(code);
@@ -119,22 +132,32 @@
         .then(data => console.log(data))
       }
 
+      // Generate python code, then make RPi server run "run_code" with socket io
       function sendCode() {
         python.pythonGenerator.INFINITE_LOOP_TRAP = null;
 		    var code = python.pythonGenerator.workspaceToCode(demoWorkspace);
 		    socket.emit('run_code', code);
       }
 
+      // If server gives back "output" event, then log it to console 
+      socket.on("output", (data) => {
+        console.log(data);
+      });
+
+      // If server goves back "output" event, then log it to Output Console
     	socket.on("output", (data) => {
 		    const outputElem = document.getElementById("output");
     		outputElem.textContent += data.message + "\n";
     		outputElem.scrollTop = outputElem.scrollHeight;  // auto-scroll
   	  });
 
+      // make RPi server run "stop_code"
     	function terminateCode() {
     		socket.emit("stop_code");
 	    }
 
+      // save block in the current Blockly Worlspace to client PC local
+      // CAUSION: "showSaveFilePicker" works on Edge, Chrome, Opera. Not work at Firefox, Safari.
       async function saveBlock(){
         const opts = {
           suggestedName: 'example',
@@ -151,6 +174,8 @@
         await writable.close()
       }
 
+      // load block to the current Blockly Worlspace from client PC local
+      // CAUSION: "showSaveFilePicker" works on Edge, Chrome, Opera. Not work at Firefox, Safari.
       async function loadBlock(){
         const [handle] = await window.showOpenFilePicker({
           types: [{
@@ -170,30 +195,13 @@
         Blockly.Events.enable();
       }
 
-      async function getPaired() {
-        const res = await fetch("/paired");
-        const devices = await res.json();
-        const list = document.getElementById("paired-list");
-        list.innerHTML = "";
-        devices.forEach(device => {
-        const item = document.createElement("li");
-        item.textContent = `${device.name} [${device.mac}] `;
-        const connectBtn = document.createElement("button");
-        connectBtn.textContent = "接続";
-        connectBtn.onclick = () => connect(device.mac);
-        item.appendChild(connectBtn);
-        const disconnectBtn = document.createElement("button");
-        disconnectBtn.textContent = "切断";
-        disconnectBtn.onclick = () => disconnect(device.mac);
-        item.appendChild(disconnectBtn);
-        const removeBtn = document.createElement("button");
-        removeBtn.textContent = "削除";
-        removeBtn.onclick = () => remove(device.mac);
-        item.appendChild(removeBtn);
-        list.appendChild(item);
-        });
-      }
+      // ### Followings are code related to bluetooth control ###
+      // To Do: Remove "接続" from "getPaired" because this often doesn't work, maybe due to RPi
+      // To Do: Paired device must be "removed" when RPi shutdown or keep device disconnect long term.
+      //        This is because "ConnJoyCon" doesn't detect the device which has already registered.
+      // To Do: Put progress or current status on the Output Console.
 
+      // scan and connect to JoyCon
       async function ConnJoyCon() {
         alert('make Joy-Con stand-by mode');
         const outputElem = document.getElementById("output");
@@ -206,6 +214,31 @@
         console.log(result.result || result.error);
         outputElem.textContent += result.result || result.error;
         outputElem.scrollTop = outputElem.scrollHeight;
+      }
+
+      // Show paired device list and command
+      async function getPaired() {
+        const res = await fetch("/paired");
+        const devices = await res.json();
+        const list = document.getElementById("paired-list");
+        list.innerHTML = "";
+        devices.forEach(device => {
+        const item = document.createElement("li");
+        item.textContent = `${device.name} [${device.mac}] `;
+        const connectBtn = document.createElement("button");
+        connectBtn.textContent = "Connect";
+        connectBtn.onclick = () => connect(device.mac);
+        item.appendChild(connectBtn);
+        const disconnectBtn = document.createElement("button");
+        disconnectBtn.textContent = "Disconnect";
+        disconnectBtn.onclick = () => disconnect(device.mac);
+        item.appendChild(disconnectBtn);
+        const removeBtn = document.createElement("button");
+        removeBtn.textContent = "Remove";
+        removeBtn.onclick = () => remove(device.mac);
+        item.appendChild(removeBtn);
+        list.appendChild(item);
+        });
       }
 
       async function connect(mac) {
@@ -247,7 +280,7 @@
         const outputElem = document.getElementById("output");
         outputElem.textContent += result.result || result.error;
         outputElem.scrollTop = outputElem.scrollHeight;
-        getPaired(); // リストを更新
+        getPaired(); // list update
       }
 
     </script>

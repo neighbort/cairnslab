@@ -14,11 +14,11 @@ socketio = SocketIO(app, cors_allowed_origins="*", async_mode="threading")  # ad
 
 current_process = None
 
-
 @app.route('/', methods=['GET', 'POST'])
 def index():
     return render_template('index.html')
 
+# This is called from "run_python()": which is used only at testing
 @app.route('/jsonrpi', methods=['POST'])
 def controll():
     code = request.json
@@ -28,41 +28,8 @@ def controll():
     except Exception as e:
         return 'Error: ' + str(e)
 
-
-"""
-class StreamRedirector:
-# class to send stdout through WebSocket in real time
-    def __init__(self):
-        self.buffer = ""
-
-    def write(self, message):
-        if message.strip():     # avoid ampty buffer
-            socketio.emit("output", {"message": message}, broadcast=True)
-
-    def flush(self):
-        pass                    # do nothing to avoid buffer
-
-
-def execute_code(code):                 # add 0331
-    old_stdout = sys.stdout
-#    sys.stdout = io.StringIO()          # capture stdio, commented out 0402
-    sys.stdout = StreamRedirector()     # add 0402
-    try:
-        exec(code, {"socketio": socketio})  # activate socketio in exec
-        output = sys.stdout.getvalue()
-    except Exception as e:
-        output = f"Error: {str(e)}"
-    finally:
-        sys.stdout = old_stdout         # stdio normalise
-#    socketio.emit('output', output)     # send result to client, commented out 0402
-
-
-@socketio.on('run_code')                # add 0331
-def handle_code(code):
-    threading.Thread(target=execute_code, args=(code,)).start()
-"""
-
-### add 0416 for terminate process
+# this makes RPi run code and let stdout issue to client real time, as well as terminate run
+# At the end of this code, initialize GPUI state
 def stream_exec_code(code, output_queue):
     class StreamRedirector:
         def write(self, message):
@@ -80,6 +47,7 @@ def stream_exec_code(code, output_queue):
         mygpio.set_gpio_default()
         output_queue.put("__end__")
 
+# queue code and put message with "output" event
 @socketio.on("run_code")
 def handle_code(code):
     global current_process
@@ -98,6 +66,7 @@ def handle_code(code):
         current_process.join()
     socketio.start_background_task(stream_output)
 
+# terminate implementing code, and initialize GPIO state
 @socketio.on("stop_code")
 def stop_code():
     global current_process
@@ -107,7 +76,6 @@ def stop_code():
     else:
         socketio.emit("output", {"message": "No running code to stop."})
     mygpio.set_gpio_default()
-### terminate process code by here
 
 
 @app.route("/scan-connect", methods=["POST"])
