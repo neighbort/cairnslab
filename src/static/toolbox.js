@@ -283,6 +283,10 @@ var toolbox = {
 			name: 'RPi',
 			categorystyle: 'text_category',
 			contents: [
+				{
+					kind: 'block',
+					type: 'init_gpio',
+				},
 				{ 
 					kind: 'block',
 					type: 'gpio_out_ctl',

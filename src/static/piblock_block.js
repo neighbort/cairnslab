@@ -59,6 +59,19 @@ const typeof_var = {
 };
 Blockly.common.defineBlocks({typeof_var: typeof_var});
 
+const init_gpio = {
+  init: function() {
+    this.appendDummyInput('script')
+      .appendField('*** Init RaspberryPi GPIO ***');
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip('this is a tool tip');
+    this.setHelpUrl('');
+    this.setColour(60);
+  }
+};
+Blockly.common.defineBlocks({init_gpio: init_gpio});
+
 const gpio_out_ctl = {
   init: function() {
     this.appendDummyInput('explanation')
