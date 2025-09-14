@@ -36,13 +36,18 @@ python.pythonGenerator.forBlock['typeof_var'] = function(block, generator) {
   return [code, python.Order.NONE];
 }
 
+python.pythonGenerator.forBlock['init_gpio'] = function(block, generator) {
+  // TODO: Assemble python into the code variable.
+  const code = 'import pigpio\n'
+  + 'pi = pigpio.pi()\n';
+  return code;
+}
+
 python.pythonGenerator.forBlock['gpio_out_ctl'] = function(block, generator) {
   const number_pin = block.getFieldValue('pin');
   const dropdown_gpioval = block.getFieldValue('gpioval');
   // TODO: Assemble python into the code variable.
-  const code = 'import pigpio\n'
-	+ 'pi = pigpio.pi()\n'
-	+ 'pi.set_mode(' + number_pin + ', pigpio.OUTPUT)\n'
+  const code = 'pi.set_mode(' + number_pin + ', pigpio.OUTPUT)\n'
 	+ 'pi.write(' + number_pin + ',' + dropdown_gpioval + ')\n';
   return code;
 }
@@ -51,9 +56,7 @@ python.pythonGenerator.forBlock['gpio_set_read'] = function(block, generator) {
   const number_pin = block.getFieldValue('pin');
   const dropdown_pud = block.getFieldValue('pud');
   // TODO: Assemble python into the code variable.
-  const code = 'import pigpio\n'
-	+ 'pi = pigpio.pi()\n'
-	+ 'pi.set_mode(' + number_pin + ', pigpio.INPUT)\n'
+  const code = 'pi.set_mode(' + number_pin + ', pigpio.INPUT)\n'
 	+ 'pi.set_pull_up_down(' + number_pin + ', pigpio.PUD_UP) if ' + dropdown_pud + '== 1 else pi.set_pull_up_down(' + number_pin + ', pigpio.PUD_DOWN)\n';
   return code;
 }
@@ -73,9 +76,7 @@ python.pythonGenerator.forBlock['gpio_pwm_ctl'] = function(block, generator) {
   // TODO: change Order.ATOMIC to the correct operator precedence strength
   const value_freq = generator.valueToCode(block, 'freq', python.Order.ATOMIC);
   // TODO: Assemble python into the code variable.
-  const code = 'import pigpio\n'
-	+ 'pi = pigpio.pi()\n'
-	+ 'if ' + value_duty + '<0 or 100<' + value_duty + ':\n'
+  const code = 'if ' + value_duty + '<0 or 100<' + value_duty + ':\n'
 	+ '\tduty=0\n'
 	+ 'else:\n'
 	+ '\tduty=int(' + value_duty + '*1000000/100)\n'
@@ -91,9 +92,7 @@ python.pythonGenerator.forBlock['gpio_servo_ctl'] = function(block, generator) {
   const dropdown_pin = block.getFieldValue('pin');
   const number_pulse = block.getFieldValue('pulse');
   // TODO: Assemble python into the code variable.
-  const code = 'import pigpio\n'
-	+ 'pi = pigpio.pi()\n'
-	+ 'if ' + number_pulse + '<500:\n'
+  const code = 'if ' + number_pulse + '<500:\n'
 	+ '\tpi.set_servo_pulsewidth(' + dropdown_pin + ', 0)\n'
 	+ 'else:\n'
 	+ '\tpi.set_servo_pulsewidth(' + dropdown_pin + ', ' + number_pulse + ')\n';
