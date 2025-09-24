@@ -172,7 +172,9 @@ Blockly.common.defineBlocks({gpio_servo_ctl: gpio_servo_ctl});
 const init_ssd1306 = {
   init: function() {
     this.appendDummyInput('script')
-      .appendField('*** Init ssd1306 on RaspberryPi with I2C  ***');
+      .appendField('*** Init ssd1306 on RaspberryPi with I2C  ')
+      .appendField(new Blockly.FieldTextInput('0C'), 'address')
+      .appendField('  ***');
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip('this is a tool tip');

@@ -100,9 +100,11 @@ python.pythonGenerator.forBlock['gpio_servo_ctl'] = function(block, generator) {
 }
 
 python.pythonGenerator.forBlock['init_ssd1306'] = function(block, generator) {
+  const text_address = block.getFieldValue('address');
   // TODO: Assemble python into the code variable.
   const code = 'from clab_packages import clab_ssd1306\n'
-  + 'clab_ssd1306.ssd1306_init(0x3C)\n';
+  + 'address = "0x" + ' + text_address + '\n'
+  + 'clab_ssd1306.ssd1306_init(address)\n';
   return code;
 }
 
