@@ -116,7 +116,7 @@ python.pythonGenerator.forBlock['display_ssd1306'] = function(block, generator) 
   // TODO: Assemble python into the code variable.
   const code = 'data = [' + value_row1 + ', ' + value_row2 + ', ' + value_row3 + ', ' + value_row4 + ']\n'
   + 'image = clab_ssd1306.draw_screen(data)\n'
-  + 'clab_ssd1306.ssd1306_image(image)\n';
+  + 'clab_ssd1306.ssd1306_image(image, address)\n';
   return code;
 }
 

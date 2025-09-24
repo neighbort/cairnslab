@@ -5,8 +5,8 @@ from PIL import Image, ImageDraw, ImageFont
 #ADDRESS = 0x3C
 #bus = smbus.SMBus(1)
 
-#def ssd1306_command(cmd):
-#    bus.write_byte_data(ADDRESS, 0x00, cmd)
+def ssd1306_command(cmd, ADDRESS):
+    bus.write_byte_data(ADDRESS, 0x00, cmd)
 
 bus = smbus.SMBus(1)
 
@@ -32,12 +32,12 @@ def ssd1306_init(ADDRESS):
         bus.write_byte_data(ADDRESS, 0x00, cmd)
 
 
-def ssd1306_image(image):
+def ssd1306_image(image, ADDRESS):
     pixels = list(image.getdata())
     for page in range(0, 8):
-        ssd1306_command(0xB0 + page)
-        ssd1306_command(0x00)
-        ssd1306_command(0x10)
+        ssd1306_command(0xB0 + page, ADDRESS)
+        ssd1306_command(0x00, ADDRESS)
+        ssd1306_command(0x10, ADDRESS)
         for i in range(0, 128, 32):  # 32バイトずつ送る
             chunk = []
             for x in range(i, i + 32):
@@ -65,4 +65,4 @@ if __name__ == "__main__":
     ssd1306_init()
 
     draw_screen(["a", "b", "c", "d"])
-    ssd1306_image(image)
+    ssd1306_image(image, 0x3C)
