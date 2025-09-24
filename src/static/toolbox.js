@@ -311,6 +311,10 @@ var toolbox = {
 					kind: 'block',
 					type: 'gpio_servo_ctl',
 				},
+				{
+					kind: 'block',
+					type: 'display_ssd1306',
+				},
 			],
 		},
 		{
