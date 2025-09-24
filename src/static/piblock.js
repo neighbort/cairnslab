@@ -99,6 +99,12 @@ python.pythonGenerator.forBlock['gpio_servo_ctl'] = function(block, generator) {
   return code;
 }
 
+python.pythonGenerator.forBlock['init_ssd1306'] = function(block, generator) {
+  // TODO: Assemble python into the code variable.
+  const code = 'import clab_ssd1306\n';
+  return code;
+}
+
 python.pythonGenerator.forBlock['sleep'] = function(block, generator) {
   const number_sec = block.getFieldValue('sec');
   // TODO: Assemble python into the code variable.

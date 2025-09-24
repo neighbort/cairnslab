@@ -287,6 +287,10 @@ var toolbox = {
 					kind: 'block',
 					type: 'init_gpio',
 				},
+				{
+					kind: 'block',
+					type: 'init_ssd1306',
+				},
 				{ 
 					kind: 'block',
 					type: 'gpio_out_ctl',

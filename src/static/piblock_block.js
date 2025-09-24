@@ -169,6 +169,19 @@ const gpio_servo_ctl = {
 };
 Blockly.common.defineBlocks({gpio_servo_ctl: gpio_servo_ctl});
 
+const init_ssd1306 = {
+  init: function() {
+    this.appendDummyInput('script')
+      .appendField('*** Init ssd1306 on RaspberryPi with I2C  ***');
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip('this is a tool tip');
+    this.setHelpUrl('');
+    this.setColour(60);
+  }
+};
+Blockly.common.defineBlocks({init_ssd1306: init_ssd1306});
+
 const sleep = {
   init: function() {
     this.appendDummyInput('length')
