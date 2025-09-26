@@ -132,7 +132,7 @@ python.pythonGenerator.forBlock['init_mma8452'] = function(block, generator) {
 python.pythonGenerator.forBlock['read_mma8452'] = function(block, generator) {
   const dropdown_coordinates = block.getFieldValue('coordinates');
   // TODO: Assemble python into the code variable.
-  const code = 'clab_mma8452.read_specified_acceleration(address, ' + coordinates + ')\n';
+  const code = 'clab_mma8452.read_acceleration(address)[' + dropdown_coordinates + ']\n';
   // TODO: Change Order.NONE to the correct operator precedence strength
   return [code, python.Order.NONE];
 }

@@ -229,9 +229,9 @@ const read_mma8452 = {
     this.appendDummyInput('script')
       .appendField('acceleration')
       .appendField(new Blockly.FieldDropdown([
-          ['x', 'coord_x'],
-          ['y', 'coord_y'],
-          ['z', 'coord_z']
+          ['x', '0'],
+          ['y', '1'],
+          ['z', '2']
         ]), 'coordinates');
     this.setOutput(true, null);
     this.setTooltip('this is a tool tip');

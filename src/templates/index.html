@@ -82,6 +82,10 @@
           <button onclick="loadBlock()">Open Block</button>
         </p>
         <p>
+          <!-- Buttons related to I2C devices -->
+           <button onclick="detectI2C()">Detect I2C Devices</button>
+        </p>
+        <p>
           <!-- Buttons related to bluetooth control -->
           <button onclick="ConnJoyCon()"> Register JoyCon</button>
           <button onclick="getPaired()"> Paired Devices</button>
@@ -281,6 +285,18 @@
         outputElem.textContent += result.result || result.error;
         outputElem.scrollTop = outputElem.scrollHeight;
         getPaired(); // list update
+      }
+
+      async function detectI2C() {
+        const outputElem = document.getElementById("output");
+        const res = await fetch("/detect_i2c", {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+        });
+        const result = await res.json();
+        console.log(result.result || result.error);
+        outputElem.textContent += result.result || result.error;
+        outputElem.scrollTop = outputElem.scrollHeight;
       }
 
     </script>

@@ -56,7 +56,7 @@ def read_specified_acceleration(ADDRESS, coord):
 if __name__ == "__main__":
     count = 0
     address = 0x1c
-    init_mma8452(address):
+    init_mma8452(address)
     while count <= 10:
         x, y, z = read_acceleration(address)
         print("x: ", x, ", y: ", y, ", z: ", z)
