@@ -172,7 +172,7 @@ Blockly.common.defineBlocks({gpio_servo_ctl: gpio_servo_ctl});
 const init_ssd1306 = {
   init: function() {
     this.appendDummyInput('script')
-      .appendField('*** Init ssd1306 on RaspberryPi with I2C  ')
+      .appendField('*** Init LED display ssd1306 on RaspberryPi with I2C  ')
       .appendField(new Blockly.FieldTextInput('3C'), 'address')
       .appendField('  ***');
     this.setPreviousStatement(true, null);
@@ -208,6 +208,38 @@ const display_ssd1306 = {
   }
 };
 Blockly.common.defineBlocks({display_ssd1306: display_ssd1306});
+
+const init_mma8452 = {
+  init: function() {
+    this.appendDummyInput('NAME')
+      .appendField('*** init accel. sensor MMA8452 on RaspberryPi with I2C')
+      .appendField(new Blockly.FieldTextInput('1c'), 'address')
+      .appendField(' ***');
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip('this is a tool tip');
+    this.setHelpUrl('');
+    this.setColour(60);
+  }
+};
+Blockly.common.defineBlocks({init_mma8452: init_mma8452});
+
+const read_mma8452 = {
+  init: function() {
+    this.appendDummyInput('script')
+      .appendField('acceleration')
+      .appendField(new Blockly.FieldDropdown([
+          ['x', 'coord_x'],
+          ['y', 'coord_y'],
+          ['z', 'coord_z']
+        ]), 'coordinates');
+    this.setOutput(true, null);
+    this.setTooltip('this is a tool tip');
+    this.setHelpUrl('');
+    this.setColour(60);
+  }
+};
+Blockly.common.defineBlocks({read_mma8452: read_mma8452});
 
 const sleep = {
   init: function() {

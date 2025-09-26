@@ -120,6 +120,23 @@ python.pythonGenerator.forBlock['display_ssd1306'] = function(block, generator) 
   return code;
 }
 
+python.pythonGenerator.forBlock['init_mma8452'] = function(block, generator) {
+  const text_address = block.getFieldValue('address');
+  // TODO: Assemble python into the code variable.
+  const code = 'from clab_packages import clab_mma8452\n'
+  + 'address = int("' + text_address + '", 16)\n'
+  + 'clab_mma8452.init_mma8452(address)\n';
+  return code;
+}
+
+python.pythonGenerator.forBlock['read_mma8452'] = function(block, generator) {
+  const dropdown_coordinates = block.getFieldValue('coordinates');
+  // TODO: Assemble python into the code variable.
+  const code = 'clab_mma8452.read_specified_acceleration(address, ' + coordinates + ')\n';
+  // TODO: Change Order.NONE to the correct operator precedence strength
+  return [code, python.Order.NONE];
+}
+
 python.pythonGenerator.forBlock['sleep'] = function(block, generator) {
   const number_sec = block.getFieldValue('sec');
   // TODO: Assemble python into the code variable.

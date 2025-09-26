@@ -1,14 +1,10 @@
 import smbus
 from PIL import Image, ImageDraw, ImageFont
 
-# SSD1306 I2C アドレス
-#ADDRESS = 0x3C
-#bus = smbus.SMBus(1)
+bus = smbus.SMBus(1)
 
 def ssd1306_command(cmd, ADDRESS):
     bus.write_byte_data(ADDRESS, 0x00, cmd)
-
-bus = smbus.SMBus(1)
 
 def ssd1306_init(ADDRESS):
     for cmd in [
@@ -31,7 +27,6 @@ def ssd1306_init(ADDRESS):
     ]:
         bus.write_byte_data(ADDRESS, 0x00, cmd)
 
-
 def ssd1306_image(image, ADDRESS):
     pixels = list(image.getdata())
     for page in range(0, 8):
@@ -49,7 +44,6 @@ def ssd1306_image(image, ADDRESS):
                 chunk.append(byte)
             bus.write_i2c_block_data(ADDRESS, 0x40, chunk)
 
-
 def draw_screen(lines):
     image = Image.new("1", (128, 64))
     draw = ImageDraw.Draw(image)
@@ -63,6 +57,5 @@ def draw_screen(lines):
 
 if __name__ == "__main__":
     ssd1306_init()
-
     draw_screen(["a", "b", "c", "d"])
     ssd1306_image(image, 0x3C)
