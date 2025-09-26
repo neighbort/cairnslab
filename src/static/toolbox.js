@@ -287,6 +287,18 @@ var toolbox = {
 					kind: 'block',
 					type: 'init_gpio',
 				},
+				{
+					kind: 'block',
+					type: 'init_ssd1306',
+				},
+				{
+					kind: 'block',
+					type: 'init_mma8452',
+				},
+				{
+					kind: 'block',
+					type: 'read_mma8452',
+				},
 				{ 
 					kind: 'block',
 					type: 'gpio_out_ctl',
@@ -306,6 +318,10 @@ var toolbox = {
 				{
 					kind: 'block',
 					type: 'gpio_servo_ctl',
+				},
+				{
+					kind: 'block',
+					type: 'display_ssd1306',
 				},
 			],
 		},

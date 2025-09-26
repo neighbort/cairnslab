@@ -99,6 +99,44 @@ python.pythonGenerator.forBlock['gpio_servo_ctl'] = function(block, generator) {
   return code;
 }
 
+python.pythonGenerator.forBlock['init_ssd1306'] = function(block, generator) {
+  const text_address = block.getFieldValue('address');
+  // TODO: Assemble python into the code variable.
+  const code = 'from clab_packages import clab_ssd1306\n'
+  + 'address = int("' + text_address + '", 16)\n'
+  + 'clab_ssd1306.ssd1306_init(address)\n';
+  return code;
+}
+
+python.pythonGenerator.forBlock['display_ssd1306'] = function(block, generator) {
+  const value_row1 = generator.valueToCode(block, 'row1', python.Order.ATOMIC);
+  const value_row2 = generator.valueToCode(block, 'row2', python.Order.ATOMIC);
+  const value_row3 = generator.valueToCode(block, 'row3', python.Order.ATOMIC);
+  const value_row4 = generator.valueToCode(block, 'row4', python.Order.ATOMIC);
+  // TODO: Assemble python into the code variable.
+  const code = 'data = [' + value_row1 + ', ' + value_row2 + ', ' + value_row3 + ', ' + value_row4 + ']\n'
+  + 'image = clab_ssd1306.draw_screen(data)\n'
+  + 'clab_ssd1306.ssd1306_image(image, address)\n';
+  return code;
+}
+
+python.pythonGenerator.forBlock['init_mma8452'] = function(block, generator) {
+  const text_address = block.getFieldValue('address');
+  // TODO: Assemble python into the code variable.
+  const code = 'from clab_packages import clab_mma8452\n'
+  + 'address = int("' + text_address + '", 16)\n'
+  + 'clab_mma8452.init_mma8452(address)\n';
+  return code;
+}
+
+python.pythonGenerator.forBlock['read_mma8452'] = function(block, generator) {
+  const dropdown_coordinates = block.getFieldValue('coordinates');
+  // TODO: Assemble python into the code variable.
+  const code = 'clab_mma8452.read_acceleration(address)[' + dropdown_coordinates + ']\n';
+  // TODO: Change Order.NONE to the correct operator precedence strength
+  return [code, python.Order.NONE];
+}
+
 python.pythonGenerator.forBlock['sleep'] = function(block, generator) {
   const number_sec = block.getFieldValue('sec');
   // TODO: Assemble python into the code variable.

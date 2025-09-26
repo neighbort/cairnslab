@@ -169,6 +169,78 @@ const gpio_servo_ctl = {
 };
 Blockly.common.defineBlocks({gpio_servo_ctl: gpio_servo_ctl});
 
+const init_ssd1306 = {
+  init: function() {
+    this.appendDummyInput('script')
+      .appendField('*** Init LED display ssd1306 on RaspberryPi with I2C  ')
+      .appendField(new Blockly.FieldTextInput('3C'), 'address')
+      .appendField('  ***');
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip('this is a tool tip');
+    this.setHelpUrl('');
+    this.setColour(60);
+  }
+};
+Blockly.common.defineBlocks({init_ssd1306: init_ssd1306});
+
+const display_ssd1306 = {
+  init: function() {
+    this.appendDummyInput('script')
+      .appendField('display text on ssd1306');
+    this.appendValueInput('row1')
+    .setAlign(Blockly.inputs.Align.RIGHT)
+      .appendField('text at row1 :');
+    this.appendValueInput('row2')
+    .setAlign(Blockly.inputs.Align.RIGHT)
+      .appendField('text at row2 :');
+    this.appendValueInput('row3')
+    .setAlign(Blockly.inputs.Align.RIGHT)
+      .appendField('text at row3 :');
+    this.appendValueInput('row4')
+    .setAlign(Blockly.inputs.Align.RIGHT)
+      .appendField('text at row4 :');
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip('this is a tool tip');
+    this.setHelpUrl('');
+    this.setColour(60);
+  }
+};
+Blockly.common.defineBlocks({display_ssd1306: display_ssd1306});
+
+const init_mma8452 = {
+  init: function() {
+    this.appendDummyInput('NAME')
+      .appendField('*** init accel. sensor MMA8452 on RaspberryPi with I2C')
+      .appendField(new Blockly.FieldTextInput('1c'), 'address')
+      .appendField(' ***');
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip('this is a tool tip');
+    this.setHelpUrl('');
+    this.setColour(60);
+  }
+};
+Blockly.common.defineBlocks({init_mma8452: init_mma8452});
+
+const read_mma8452 = {
+  init: function() {
+    this.appendDummyInput('script')
+      .appendField('acceleration')
+      .appendField(new Blockly.FieldDropdown([
+          ['x', '0'],
+          ['y', '1'],
+          ['z', '2']
+        ]), 'coordinates');
+    this.setOutput(true, null);
+    this.setTooltip('this is a tool tip');
+    this.setHelpUrl('');
+    this.setColour(60);
+  }
+};
+Blockly.common.defineBlocks({read_mma8452: read_mma8452});
+
 const sleep = {
   init: function() {
     this.appendDummyInput('length')

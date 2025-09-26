@@ -7,6 +7,7 @@ import io
 import ctl_bluetooth as myblue
 import ctl_gpio as mygpio
 from multiprocessing import Process, Queue
+import subprocess
 
 # Set up Web Server
 app = Flask(__name__)
@@ -107,6 +108,17 @@ def remove():
     stdout = myblue.remove_device(mac)
     return jsonify({"result": stdout})
 
+@app.route("/detect_i2c", methods=["POST"])
+def detect_i2c():
+    try:
+        result = subprocess.check_output(
+            ["sudo", "i2cdetect", "-y", "1"], 
+            stderr=subprocess.STDOUT, 
+            text=True
+        )
+    except subprocess.CalledProcessError as e:
+        result = f"Error: {e.output}"
+    return jsonify({"result": result})
 
 if __name__ == '__main__':
 
