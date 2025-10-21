@@ -9,6 +9,15 @@ python.pythonGenerator.forBlock['average'] = function(block, generator) {
     return [code, python.Order.NONE];
   }
 
+python.pythonGenerator.forBlock['abs'] = function(block, generator) {
+  // TODO: change Order.ATOMIC to the correct operator precedence strength
+  const value_value = generator.valueToCode(block, 'value', python.Order.ATOMIC);
+  // TODO: Assemble python into the code variable.
+  const code = 'abs(' + value_value + ')';
+  // TODO: Change Order.NONE to the correct operator precedence strength
+  return [code, python.Order.NONE];
+}
+
 python.pythonGenerator.forBlock['class4logic'] = function(block, generator) {
   const dropdown_class = block.getFieldValue('class');
   // TODO: Assemble python into the code variable.
@@ -32,6 +41,17 @@ python.pythonGenerator.forBlock['typeof_var'] = function(block, generator) {
   const value_variable = generator.valueToCode(block, 'variable', python.Order.ATOMIC);
   // TODO: Assemble python into the code variable.
   const code = 'type(' + value_variable + ')';
+  // TODO: Change Order.NONE to the correct operator precedence strength
+  return [code, python.Order.NONE];
+}
+
+python.pythonGenerator.forBlock['find_str'] = function(block, generator) {
+  // TODO: change Order.ATOMIC to the correct operator precedence strength
+  const value_target = generator.valueToCode(block, 'target', python.Order.ATOMIC);
+  // TODO: change Order.ATOMIC to the correct operator precedence strength
+  const value_string = generator.valueToCode(block, 'string', python.Order.ATOMIC);
+  // TODO: Assemble python into the code variable.
+  const code = '(' + value_target + ' in ' + value_string + ')';
   // TODO: Change Order.NONE to the correct operator precedence strength
   return [code, python.Order.NONE];
 }
@@ -143,6 +163,15 @@ python.pythonGenerator.forBlock['sleep'] = function(block, generator) {
 //  const code = 'from time import sleep;';
   const code = 'from time import sleep\n'
 	+ 'sleep(' + number_sec + ')\n';
+  return code;
+}
+
+python.pythonGenerator.forBlock['sleep2'] = function(block, generator) {
+  // TODO: change Order.ATOMIC to the correct operator precedence strength
+  const value_length = generator.valueToCode(block, 'length', python.Order.ATOMIC);
+  // TODO: Assemble python into the code variable.
+  const code = 'from time import sleep\n'
+  + 'sleep(' + value_length + ')\n';
   return code;
 }
 

@@ -16,6 +16,20 @@ const average = {
 };
 Blockly.common.defineBlocks({average: average});
 
+const abs = {
+  init: function() {
+    this.appendValueInput('value')
+    .setCheck('Number')
+      .appendField('abs');
+    this.appendDummyInput('NAME');
+    this.setOutput(true, null);
+    this.setTooltip('this is a tool tip');
+    this.setHelpUrl('');
+    this.setColour(225);
+  }
+};
+Blockly.common.defineBlocks({abs: abs});
+
 const class4logic = {
   init: function() {
     this.appendDummyInput('expl')
@@ -58,6 +72,25 @@ const typeof_var = {
   }
 };
 Blockly.common.defineBlocks({typeof_var: typeof_var});
+
+const find_str = {
+  init: function() {
+    this.appendValueInput('target')
+    .setCheck('String')
+      .appendField('is word:');
+    this.appendDummyInput('text1')
+      .appendField('in');
+    this.appendValueInput('string')
+    .setCheck('String');
+    this.appendDummyInput('text2')
+      .appendField('?');
+    this.setOutput(true, null);
+    this.setTooltip('this is a tool tip');
+    this.setHelpUrl('');
+    this.setColour(150);
+  }
+};
+Blockly.common.defineBlocks({find_str: find_str});
 
 const init_gpio = {
   init: function() {
@@ -255,6 +288,21 @@ const sleep = {
 };
 Blockly.common.defineBlocks({sleep: sleep});
 
+const sleep2 = {
+  init: function() {
+    this.appendValueInput('length')
+    .setCheck('Number');
+    this.appendDummyInput('description')
+      .appendField('sec sleep');
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip('this is a tool tip');
+    this.setHelpUrl('');
+    this.setColour(0);
+  }
+};
+Blockly.common.defineBlocks({sleep2: sleep2});
+
 const do_nothing = {
   init: function() {
     this.appendDummyInput('explanation')
@@ -320,7 +368,7 @@ const cmd_distributor = {
     this.setNextStatement(true, null);
     this.setTooltip('');
     this.setHelpUrl('');
-    this.setColour(270);
+    this.setColour(315);
   }
 };
 Blockly.common.defineBlocks({cmd_distributor: cmd_distributor});

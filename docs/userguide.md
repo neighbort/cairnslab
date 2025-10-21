@@ -2,22 +2,21 @@
 Raspberry Pi Zero 2W を自宅のネットワークに接続し、更にノートパソコンから操作するための基本設定を行います。
 ### Step 1.1: Raspberry Pi ZERO 2Wの準備
 ・micro SDカードをRaspberry Pi ZERO 2Wに差し込みます。  
-・ディスプレイとRaspberry Pi Zero 2Wを繋ぎます。Raspberry Pi Zero 2WのミニHDMIポートにHDMIケーブルを接続します。  
+・ディスプレイとRaspberry Pi Zero 2Wを繋ぎます。図1.1-1ののミニHDMIポートにミニHDMIケーブルを接続します。  
 ・キーボードとRaspberry Pi Zero 2Wを繋ぎます。図1.1-1のBのUSB type bポートにキーボードのUSBケーブルを接続します。  
-・電源とRaspberry Pi Zero 2Wを繋ぎます。図1.1-1のAのUSB type bポートに5V電源を繋ぎます。Raspberry Pi Zero 2Wが起動し、ディスレプレイに図1.1-2の画面が表示されたら完了です。  
+・電源とRaspberry Pi Zero 2Wを繋ぎます。図1.1-1のAのUSB type bポートに5V電源を繋ぎます。Raspberry Pi Zero 2Wが起動します。  
+・login名とPasswordを要求されます。出荷時のlogin名とPasswordは以下になります。キーボードでそれぞれ入力すると、ディスプレイに図1.1-2の画面が表示され、Raspberry Pi Zero 2Wの立上が完了となります。  
+`Login name : cairnsberry`  
+`Password : cairnsberryPi`
 ### Step 1.2: WiFiの設定
-・キーボードで以下のコマンドを入力し、エンターキーを押します。図1.2-1の画面が表示されます。  
-`sudo raspi-config`  
-・メニューから "1 System Options" を選択し、更に "S1 Wireless LAN" を選択します。図1.2-2の画面が表示されます。  
-・画面の表示に従って以下の入力します。  
-- 国コード: JP
-- SSID: ご使用のWiFiのSSID
-- パスワード: ご使用のWiFiのSSID  
-
-・メニューに戻し、"Finish" を選択します。図1.1-2の画面に戻ります。  
+・キーボードで以下のコマンドを入力し、エンターキーを押します。画面に利用可能なWi-Fiネットワークが表示されます。利用予定のWi-Fiが画面に表示されていることを確認してください。  
+`sudo nmcli device wifi list`  
+・キーボードで以下のコマンドを入力し、エンターキーを押します。ここで、"SSID"には利用予定のWiFiのSSIDを、"YourPassword"にはWi-Fiのパスワードを入力します。これでWi-Fiへの接続が完了します。次回以降、Raspberry Pi Zero 2Wは起動すると自動的にこのWi-Fiに接続します。  
+`nmcli device wifi connect "SSID" password "YourPassword"`  
+もしSSIDにスペースが含まれる場合は、SSIDを""で囲って入力するようにしてください。  
 ・キーボードで以下のコマンドを入力し、エンターキーを押します。Raspberry Pi ZERO 2Wが再起動します。  
 `sudo reboot`  
-・再度図1.1-2の画面が表示されたら、キーボードで以下のコマンドを入力し、エンターキーを押します。Raspberry Pi ZERO 2WのIPアドレスが表示されるので、表示されたIPアドレスをメモしてください（例: 192.168.0.123）。  
+・再度login名とパスワードを入力し、図1.1-2の画面が表示されたら、キーボードで以下のコマンドを入力し、エンターキーを押します。Raspberry Pi ZERO 2WのIPアドレスが表示されるので、表示されたIPアドレスをメモしてください（例: 192.168.0.123）。  
 `hostname -I`  
 ### Step 1.3: SSH接続
 ※以降はRaspberry Pi ZERO 2Wと同じWiFiに接続したパソコンで操作を行います。  
@@ -34,7 +33,7 @@ Raspberry Pi Zero 2W を自宅のネットワークに接続し、更にノー�
 ・付属のボトムハウジングを基盤にあてがい、タッピングネジでネジ止めします。  
 ・付属のトップカバーを差し込みます。以上で組立完了です。  
 ### Note
-・Step 1.2が完了すると、Raspberry Pi ZERO 2Wを起動した際、登録したWiFiに自動で接続されます。ディスプレイとキーボード無しで、STEP 1.3のSSH接続でパソコンからRaspberry Pi ZERO 2Wを操作することができます。  
+・Step 1.2が完了すると、Raspberry Pi ZERO 2Wは起動時に自動でWiFiに接続します。ですので、STEP 1.3のSSH接続を用いれば、パソコンからRaspberry Pi ZERO 2Wを操作することができます。  
 
 ## 2. ビジュアルプログラム環境の実行
 Raspberry Pi ZERO 2Wには予めビジュアルプログラムの為の環境をインストールしています。ここでは当ビジュアルプログラム環境の立上を行います。  

@@ -181,6 +181,10 @@ var toolbox = {
             },
           },
         },
+				{
+					kind: 'block',
+					type: 'abs'
+				},
       ],
 		},
 		{
@@ -203,6 +207,10 @@ var toolbox = {
 				{
 					kind: 'block',
 					type: 'typeof_var',
+				},
+				{
+					kind: 'block',
+					type: 'find_str'
 				},
 			],
 		},
@@ -259,6 +267,10 @@ var toolbox = {
 				{
 					kind: 'block',
 					type: 'sleep'
+				},
+				{
+					kind: 'block',
+					type: 'sleep2'
 				},
 				{
 					kind: 'block',
