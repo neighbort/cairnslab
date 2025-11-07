@@ -1,10 +1,14 @@
-## 1. RAspberry Pi Zero 2Wの設定
-Raspberry Pi Zero 2W を自宅のネットワークに接続し、更にノートパソコンから操作するための基本設定を行います。
+## 1. Raspberry Pi Zero 2Wの初期設定
+Raspberry Pi Zero 2W をご自宅のWiFiネットワークに接続し、更にパソコンを介して操作するための初期設定を行います。
 ### Step 1.1: Raspberry Pi ZERO 2Wの準備
 ・micro SDカードをRaspberry Pi ZERO 2Wに差し込みます。  
 ・ディスプレイとRaspberry Pi Zero 2Wを繋ぎます。図1.1-1ののミニHDMIポートにミニHDMIケーブルを接続します。  
-・キーボードとRaspberry Pi Zero 2Wを繋ぎます。図1.1-1のBのUSB type bポートにキーボードのUSBケーブルを接続します。  
-・電源とRaspberry Pi Zero 2Wを繋ぎます。図1.1-1のAのUSB type bポートに5V電源を繋ぎます。Raspberry Pi Zero 2Wが起動します。  
+・キーボードとRaspberry Pi Zero 2Wを繋ぎます。図1.1-1のUSBポートBにキーボードのUSBケーブルを接続します。  
+・電源とRaspberry Pi Zero 2Wを繋ぎます。図1.1-1のUSBポートAに5V電源を繋ぎます。Raspberry Pi Zero 2Wが起動します。  
+
+![図1.1-1 Raspberry Pi Zero 2W](fig/fig1_1-1.jpg)  
+[図1.1-1] Raspberry Pi Zero 2W
+
 ・login名とPasswordを要求されます。出荷時のlogin名とPasswordは以下になります。キーボードでそれぞれ入力すると、ディスプレイに図1.1-2の画面が表示され、Raspberry Pi Zero 2Wの立上が完了となります。  
 `Login name : cairnsberry`  
 `Password : cairnsberryPi`
@@ -29,9 +33,8 @@ Raspberry Pi Zero 2W を自宅のネットワークに接続し、更にノー�
 ・以下のコマンドでRaspberry Pi ZERO 2Wをシャットダウンします。  
 `sudo shutdown -h now`  
 ・付属のミドルハウジングを基盤に取り付けます。  
-・基盤のピンソケットにRaspberry Pi ZERO 2Wを取差し込みます。  
-・付属のボトムハウジングを基盤にあてがい、タッピングネジでネジ止めします。  
-・付属のトップカバーを差し込みます。以上で組立完了です。  
+・ミドルハウジング内の基盤のピンソケットにRaspberry Pi ZERO 2Wを取差し込みます。  
+・付属のトップカバーを差し込みます。以上で組立完了です。図1.4-1も参照ください。  
 ### Note
 ・Step 1.2が完了すると、Raspberry Pi ZERO 2Wは起動時に自動でWiFiに接続します。ですので、STEP 1.3のSSH接続を用いれば、パソコンからRaspberry Pi ZERO 2Wを操作することができます。  
 
@@ -58,8 +61,8 @@ Raspberry Pi ZERO 2Wには予めビジュアルプログラムの為の環境を
 `https://IPアドレス(1.2でメモしたもの):334`  
 ・”安全ではありません”等の警告が表示されますので、詳細表示をクリックしアクセスを行います。  
 ・図2.3-1が表示されれば成功です。  
-## 3. ビジュアルプログラミング環境ガイド
-### 3.1: 概要
+## 3. ビジュアルプログラミング／電子工作ガイド
+### 3.1: ビジュアルプログラミングの概要
 ・図3.1-1がビジュアルプログラミング環境です。パソコンのブラウザ上でブロックを組み立ててプログラムを行います。組み立てたプログラムは、Raspberry Pi ZERO 2W上で実行することが出来ます。  
 ・インターフェースの各部について説明します。
 - A. Toolbox : プログラムする為のブロックを選択します
@@ -70,8 +73,10 @@ Raspberry Pi ZERO 2Wには予めビジュアルプログラムの為の環境を
 - F. Console : Raspberry Pi ZERO 2W上で実行しているプログラムの出力等を表示します。  
 - G. Bluetooth : Joy-ConとRaspberry Pi ZERO 2Wを接続する場合に使用します。  
 ### 3.2: ビジュアルプログラミング
-・Toolbox内でプログラムする為に必要なブロックを選択できます。ブロックをWorkspaceにドラッグアンドドロップすることでプログラミングできます。
-### 3.3: プログラム例
+・Toolbox内でプログラムする為に必要なブロックを選択できます。ブロックをWorkspaceにドラッグアンドドロップすることでプログラミングできます。  
+### 3.3: ラズパイユニットの概要
+あ
+### 3.4: プログラム例
 ・
 
 ## 4. 発送時のRaspberry Pi OS設定
