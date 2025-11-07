@@ -12,16 +12,6 @@ h1 {
   font-size: 140%;
 }
 
-pre {
-  background-color: #111;
-  color: #0f0;
-  padding: 10px;
-  border-radius: 4px;
-  overflow-y: auto;
-  margin-top: 10px;
-  white-space: pre-wrap;
-}
-
 #pageContainer {
   display: flex;
   width: 100%;
@@ -44,6 +34,3 @@ pre {
   min-width: 600px;
 }
 
-#output {
-  height: 70%;
-}
