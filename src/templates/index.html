@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>cairnslab ver1.0.0</title>
+    <title>cairnslab</title>
 
     <!-- Blockly package instalation: -->
     <!-- To Do: Better to use npm package, currently use cdn -->
@@ -29,31 +29,12 @@
     <script src="/static/toolbox.js"></script>
     <script src="/static/startblocks.js"></script>
 
-    <!-- Define html style for Ouotput Console -->
-    <!-- To Do: Output Console color is not up to date style, need improvement -->
-    <!-- To Do: Style text must put out to /static/css/style.css -->
-    <style>
-      body {
-        background-color: #fff;
-        font-family: sans-serif;
-      }
-      h1 {
-        font-weight: normal;
-        font-size: 140%;
-      }
-      pre {
-        background-color: #111;
-        color: #0f0;
-        padding: 10px;
-        border-radius: 4px;
-        overflow-y: auto;
-        margin-top: 10px;
-        white-space: pre-wrap;
-      }
-    </style>
-
     <!-- Define css style sheet -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!-- Refer to Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
   </head>
 
 
