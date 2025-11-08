@@ -1,4 +1,3 @@
-
 #blocklyDiv {
   flex-basis: 100%;
   height: 100%;
@@ -91,12 +90,13 @@ body{
 /* ボタン群 */
 .btn-row { display:flex; gap:12px; flex-wrap:wrap; margin-top:12px; }
 .button {
-  padding:10px 14px;
+  padding:12px 18px;
   border-radius:10px;
   background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(250,250,250,0.85));
   border: 1px solid rgba(16,24,40,0.06);
   box-shadow: 0 2px 8px rgba(16,24,40,0.04);
-  font-size:14px;
+  font-size:18px;
+  font-weight:600;
   cursor:pointer;
   transition: transform .12s ease, box-shadow .12s;
 }
@@ -106,6 +106,10 @@ body{
   border-color: rgba(255, 255, 255, 0.25);
   transform: translateY(-1px);
   box-shadow: 0 4px 10px rgba(255, 255, 255, 0.08);
+}
+a.button {
+  text-decoration: none;
+  display: inline-block; /* ブロック要素にしてクリック範囲を確保 */
 }
 
 /* クリック時の反応（押し込まれる感） */
@@ -122,6 +126,133 @@ body{
 .button.ghost {
   background: transparent;
   border: 1px dashed rgba(16,24,40,0.06);
+}
+
+.button-gray {
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(142,142,147,0.25), rgba(99,99,102,0.2)); /* Appleグレー階調 */
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  font-size: 14px;
+  color: #1c1c1e; /* 深い黒（SF Pro風） */
+  font-family: 'SF Pro Display', 'Inter', sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s, background 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+/* hover 時 */
+.button-gray:hover {
+  background: linear-gradient(180deg, rgba(174,174,178,0.35), rgba(124,124,128,0.3));
+  border-color: rgba(255,255,255,0.15);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(255,255,255,0.05);
+}
+/* active 時（クリック押下感） */
+.button-gray:active {
+  transform: translateY(0);
+  background: linear-gradient(180deg, rgba(99,99,102,0.35), rgba(72,72,74,0.3));
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.button-darkgray {
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(60, 60, 60, 0.95), rgba(30, 30, 30, 0.9));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  font-size: 14px;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s, background 0.2s ease;
+}
+/* ホバー時（少し明るく浮き上がる） */
+.button-darkgray:hover {
+  background: linear-gradient(180deg, rgba(90, 90, 90, 1), rgba(40, 40, 40, 0.95));
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.08);
+  transform: translateY(-1px);
+}
+/* クリック時（押し込まれる感） */
+.button-darkgray:active {
+  transform: translateY(0);
+  background: linear-gradient(180deg, rgba(40, 40, 40, 1), rgba(25, 25, 25, 0.95));
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.button-green {
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(48,209,88,0.85), rgba(52,199,89,0.8));
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 2px 8px rgba(48,209,88,0.2);
+  font-size: 14px;
+  color: #1c1c1e;
+  font-family: 'SF Pro Display', 'Inter', sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s, background 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+.button-green:hover {
+  background: linear-gradient(180deg, rgba(52,209,90,0.9), rgba(36,178,80,0.85));
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(48,209,88,0.3);
+}
+.button-green:active {
+  transform: translateY(0);
+  background: linear-gradient(180deg, rgba(52,199,89,0.8), rgba(30,150,60,0.7));
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.button-red {
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(255,69,58,0.85), rgba(255,59,48,0.8));
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 2px 8px rgba(255,59,48,0.2);
+  font-size: 14px;
+  color: #1c1c1e;
+  font-family: 'SF Pro Display', 'Inter', sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s, background 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+.button-red:hover {
+  background: linear-gradient(180deg, rgba(255,105,97,0.9), rgba(255,69,58,0.85));
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255,59,48,0.3);
+}
+.button-red:active {
+  transform: translateY(0);
+  background: linear-gradient(180deg, rgba(255,59,48,0.8), rgba(215,0,0,0.7));
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.button-blue {
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(10,132,255,0.85), rgba(0,122,255,0.8));
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 2px 8px rgba(0,122,255,0.2);
+  font-size: 14px;
+  color: #1c1c1e; /* 黒文字 */
+  font-family: 'SF Pro Display', 'Inter', sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s, background 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+.button-blue:hover {
+  background: linear-gradient(180deg, rgba(64,156,255,0.9), rgba(10,132,255,0.85));
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(10,132,255,0.3);
+}
+.button-blue:active {
+  transform: translateY(0);
+  background: linear-gradient(180deg, rgba(0,122,255,0.8), rgba(0,64,255,0.7));
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
 }
 
 /* コントロールのグループ見出し */
@@ -214,7 +345,7 @@ body{
   font-size: 13px;
   line-height: 1.5;
   overflow-y: auto;
-  height: 300px;
+  height: 400px;
   transition: background 0.3s ease, border 0.3s ease;
 }
 
