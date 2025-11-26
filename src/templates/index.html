@@ -80,19 +80,24 @@
 
       <!-- Blockly workspace -->
       <div class="right">
-        <div>
-          <button class="button-gray" onclick="loadBlock()">Open Block</button>
-          <button class="button-gray" onclick="saveBlock()">Save As</button>
-          <button class="button-green" onclick="sendCode()">Run</button>
-          <button class="button-red" onclick="terminateCode()">Terminate</button>
-          <button class="button-blue" onclick="showCode()">Show Code</button>
-          <!-- Buttons to show/run/terminate programm coded by Blockly -->
-          <!-- button class="button" onclick="showCode()">Show Python Code</button>
-          <button class="button" onclick="sendCode()">Run on Rpi</button>
-          <button class="button" onclick="terminateCode()">Terminate</button-->
-          <!-- CAUSION: use following "run_python()" for test or debug only -->
-          <!--button onclick="run_python()">Run on Rpi test mode</button-->
+        <div class="button-bar">
+          <div class="left-buttons">
+            <button class="button-gray" onclick="loadBlock()">Open Block</button>
+            <button class="button-gray" onclick="saveBlock()">Save As</button>
+          </div>
+          <div class="right-buttons">
+            <button class="button-green" onclick="sendCode()">Run</button>
+            <button class="button-red" onclick="terminateCode()">Terminate</button>
+            <button class="button-blue" onclick="showCode()">Show Code</button>
+            <!-- Buttons to show/run/terminate programm coded by Blockly -->
+            <!-- button class="button" onclick="showCode()">Show Python Code</button>
+            <button class="button" onclick="sendCode()">Run on Rpi</button>
+            <button class="button" onclick="terminateCode()">Terminate</button-->
+            <!-- CAUSION: use following "run_python()" for test or debug only -->
+            <!--button onclick="run_python()">Run on Rpi test mode</button-->
+          </div>
         </div>
+        <br>
         <div id="blocklyDiv"></div>
       </div>
     </div>
