@@ -35,50 +35,73 @@
     <!-- Refer to Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
+    <style>
+
+    </style>
+
   </head>
 
 
   <body>
-    <p>
-      cairnslab
-    </p>
 
     <!-- Layout -->
-    <div id="pageContainer">
-      <div id="consoleDiv">
-        <p>
-          <!-- Buttons to show/run/terminate programm coded by Blockly -->
-          <!-- To Do: Improve button design to tell function from it -->
-          <!-- To Do: Positions of show/run/terminate/save/load may be better at near Workspace -->
-          <!-- To Do: Function names and Button indications don't replesents its role directly, need update -->
-          <button onclick="showCode()">Show Python Code</button>
-          <button onclick="sendCode()">Run on Rpi</button>
-          <button onclick="terminateCode()">Terminate</button>
-          <!-- CAUSION: use following "run_python()" for test or debug only -->
-          <!--button onclick="run_python()">Run on Rpi test mode</button-->
-        </p>
-        <p>
-          <!-- Buttons to save/load Block -->
-          <button onclick="saveBlock()">Save Block</button>
-          <button onclick="loadBlock()">Open Block</button>
-        </p>
-        <p>
-          <!-- Buttons related to I2C devices -->
-           <button onclick="detectI2C()">Detect I2C Devices</button>
-        </p>
-        <p>
-          <!-- Buttons related to bluetooth control -->
-          <button onclick="ConnJoyCon()"> Register JoyCon</button>
-          <button onclick="getPaired()"> Paired Devices</button>
-          <ul id="paired-list"></ul>
-        </p>
+    <div class="app">
+      <div class="left">
+        <div class="card">
+          <div class="header">
+            <div class="logo">CL</div>
+            <div>
+              <!--div class="title">Cairns Lab</div-->
+              <a href="https://github.com/neighbort/cairnslab" target="_blank" class="button">
+                Cairnslab
+              </a>
+              <!--div class="subtitle">served by cairnsberry</div-->
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div style="font-weight:600">Raspberry Pi Control</div>
+          <br>
+          <div class="group-title">I2C Devices Control</div>
+            <!-- Buttons related to I2C devices -->
+            <button class="button-gray" onclick="detectI2C()">Detect I2C Devices</button>
+          <div class="group-title">Joy-Con Control</div>
+            <!-- Buttons related to bluetooth control -->
+            <button class="button-gray" onclick="ConnJoyCon()"> Register JoyCon</button>
+            <button class="button-gray" onclick="getPaired()"> Paired Devices</button>
+            <ul id="paired-list"></ul>
+        </div>
         <!-- Output Console -->
-        <h3>Console Output:</h3>
-        <pre id="output">(Console will appear here...)</pre>
+        <div>
+          <div style="font-weight:600">Console</div>
+          <pre id="output"></pre>
+        </div>
       </div>
+
       <!-- Blockly workspace -->
-      <div id="blocklyDiv"></div>
+      <div class="right">
+        <div class="button-bar">
+          <div class="left-buttons">
+            <button class="button-gray" onclick="loadBlock()">Open Block</button>
+            <button class="button-gray" onclick="saveBlock()">Save As</button>
+          </div>
+          <div class="right-buttons">
+            <button class="button-green" onclick="sendCode()">Run</button>
+            <button class="button-red" onclick="terminateCode()">Terminate</button>
+            <button class="button-blue" onclick="showCode()">Show Code</button>
+            <!-- Buttons to show/run/terminate programm coded by Blockly -->
+            <!-- button class="button" onclick="showCode()">Show Python Code</button>
+            <button class="button" onclick="sendCode()">Run on Rpi</button>
+            <button class="button" onclick="terminateCode()">Terminate</button-->
+            <!-- CAUSION: use following "run_python()" for test or debug only -->
+            <!--button onclick="run_python()">Run on Rpi test mode</button-->
+          </div>
+        </div>
+        <br>
+        <div id="blocklyDiv"></div>
+      </div>
     </div>
+
 
     <script>
       // inject toolbox to Blockly Workspace
