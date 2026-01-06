@@ -18,8 +18,8 @@ import threading
 import json
 import sys
 import io
-import ctl_bluetooth as myblue
-import ctl_gpio as mygpio
+from clab_packages import ctl_bluetooth as myblue
+from clab_packages import ctl_gpio as mygpio
 from multiprocessing import Process, Queue
 import subprocess
 
