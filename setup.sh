@@ -21,6 +21,7 @@ sudo apt install -y pigpiod || echo "ERROR at pigpiod" >> log.txt
 sudo apt install -y i2c-tools || echo "ERROR at i2c-tools" >> log.txt
 sudo apt install -y dhcpcd5 || echo "ERROR at dhcpcd5" >> log.txt
 sudo apt install -y fonts-takao || echo "ERROR at fonts-takao" >> log.txt
+sudo apt install -y rpicam-apps || echo "ERROR at rpicam-apps" >> log.txt
 
 # Installing python package
 sudo apt install -y python3-pigpio || echo "ERROR at python3-pigpio" >> log.txt
@@ -32,6 +33,8 @@ sudo apt install -y python3-evdev || echo "ERROR at python3-evdev" >> log.txt
 sudo apt install -y python3-smbus || echo "ERROR at python3-smbus" >> log.txt
 sudo apt install -y python3-pil || echo "ERROR at python3-pil" >> log.txt
 sudo apt install -y python3-setuptools || echo "ERROR at python3-setuptools" >> log.txt
+sudo apt install -y python3-picamera2 || echo "ERROR at python3-picamera2" >> log.txt
+sudo apt install -y python3-opencv || echo "ERROR at python3-opencv" >> log.txt
 
 # LED lighting setup
 echo ">>> set Raspberry Pi LED heatbeat\n"
