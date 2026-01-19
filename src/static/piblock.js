@@ -32,6 +32,21 @@ python.pythonGenerator.forBlock['abs'] = function(block, generator) {
   return [code, python.Order.NONE];
 }
 
+python.pythonGenerator.forBlock['init_math'] = function(block, generator) {
+  // TODO: Assemble python into the code variable.
+  const code = 'import math\n';
+  return code;
+}
+
+python.pythonGenerator.forBlock['sin'] = function(block, generator) {
+  // TODO: change Order.ATOMIC to the correct operator precedence strength
+  const value_degree = generator.valueToCode(block, 'degree', python.Order.ATOMIC);
+  // TODO: Assemble python into the code variable.
+  const code = 'math.sin(math.radians(' + value_degree + '))';
+  // TODO: Change Order.NONE to the correct operator precedence strength
+  return [code, python.Order.NONE];
+}
+
 python.pythonGenerator.forBlock['class4logic'] = function(block, generator) {
   const dropdown_class = block.getFieldValue('class');
   // TODO: Assemble python into the code variable.
@@ -103,7 +118,7 @@ python.pythonGenerator.forBlock['gpio_read_status'] = function(block, generator)
   return [code, python.Order.NONE];
 }
 
-python.pythonGenerator.forBlock['gpio_pwm_ctl'] = function(block, generator) {
+python.pythonGenerator.forBlock['gpio_pwm_ctl_hw'] = function(block, generator) {
   const dropdown_pin = block.getFieldValue('pin');
   // TODO: change Order.ATOMIC to the correct operator precedence strength
   const value_duty = generator.valueToCode(block, 'duty', python.Order.ATOMIC);
@@ -119,6 +134,26 @@ python.pythonGenerator.forBlock['gpio_pwm_ctl'] = function(block, generator) {
 	+ 'else:\n'
 	+ '\tfreq=' + value_freq + '\n'
 	+ 'pi.hardware_PWM(' + dropdown_pin + ', freq, duty)\n';
+  return code;
+}
+
+python.pythonGenerator.forBlock['gpio_pwm_ctl_sw'] = function(block, generator) {
+  const number_pin = block.getFieldValue('pin');
+  // TODO: change Order.ATOMIC to the correct operator precedence strength
+  const value_duty = generator.valueToCode(block, 'duty', python.Order.ATOMIC);
+  // TODO: change Order.ATOMIC to the correct operator precedence strength
+  const value_freq = generator.valueToCode(block, 'freq', python.Order.ATOMIC);
+  // TODO: Assemble python into the code variable.
+  const code = 'if ' + value_duty + '<0 or 100<' + value_duty + ':\n'
+  + '\tduty=0\n'
+  + 'else:\n'
+  + '\tduty=int(' + value_duty + '*2.55)\n'
+  + 'if ' + value_freq + '<0 or 8000<' + value_freq + ':\n'
+  + '\tfreq=0\n'
+  + 'else:\n'
+  + '\tfreq=' + value_freq + '\n'
+  + 'pi.set_PWM_dutycycle(' + number_pin + ', ' + value_duty + ')\n'
+  + 'pi.set_PWM_frequency(' + number_pin + ', ' + value_freq + ')\n';
   return code;
 }
 

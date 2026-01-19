@@ -44,6 +44,34 @@ const abs = {
 };
 Blockly.common.defineBlocks({abs: abs});
 
+const init_math = {
+  init: function() {
+    this.appendDummyInput('note1')
+      .appendField('*** Init math package ***');
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip('');
+    this.setHelpUrl('');
+    this.setColour(225);
+  }
+};
+Blockly.common.defineBlocks({init_math: init_math});
+
+const sin = {
+  init: function() {
+    this.appendValueInput('degree')
+    .setCheck('Number')
+      .appendField('sin (');
+    this.appendDummyInput('note1')
+      .appendField('deg)');
+    this.setOutput(true, null);
+    this.setTooltip('');
+    this.setHelpUrl('');
+    this.setColour(225);
+  }
+};
+Blockly.common.defineBlocks({sin: sin});
+
 const class4logic = {
   init: function() {
     this.appendDummyInput('expl')
@@ -170,7 +198,7 @@ const gpio_read_status = {
 };
 Blockly.common.defineBlocks({gpio_read_status: gpio_read_status});
 
-const gpio_pwm_ctl = {
+const gpio_pwm_ctl_hw = {
   init: function() {
     this.appendValueInput('duty')
     .setCheck('Number')
@@ -194,7 +222,29 @@ const gpio_pwm_ctl = {
     this.setColour(75);
   }
 };
-Blockly.common.defineBlocks({gpio_pwm_ctl: gpio_pwm_ctl});
+Blockly.common.defineBlocks({gpio_pwm_ctl_hw: gpio_pwm_ctl_hw});
+
+const gpio_pwm_ctl_sw = {
+  init: function() {
+    this.appendDummyInput('note1')
+      .appendField('set GPIO No. ')
+      .appendField(new Blockly.FieldNumber(0, 0, 27), 'pin');
+    this.appendValueInput('duty')
+    .setCheck('Number')
+      .appendField('PWM with duty');
+    this.appendValueInput('freq')
+    .setCheck('Number')
+      .appendField('%, Freq');
+    this.appendDummyInput('note2')
+      .appendField('Hz');
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip('');
+    this.setHelpUrl('');
+    this.setColour(75);
+  }
+};
+Blockly.common.defineBlocks({gpio_pwm_ctl_sw: gpio_pwm_ctl_sw});
 
 const gpio_servo_ctl = {
   init: function() {

@@ -109,14 +109,14 @@ var toolbox = {
 			name: 'Math',
 			categorystyle: 'math_category',
 			contents: [
-        {
+        		{
 					kind: 'block',
 					type: 'math_number',
 					fields: {
 						NUM: 123,
 					},
-        },
-       	{
+        		},
+       			{
 					kind: 'block',
 					type: 'math_arithmetic',
 				},
@@ -138,7 +138,7 @@ var toolbox = {
 						},
 					}
 				},
-        {
+        		{
 					kind: 'block',
 					type: 'math_modulo',
 					inputs: {
@@ -160,33 +160,41 @@ var toolbox = {
 						},
 					},
 				},
-        {
+        		{
 					kind: 'block',
 					type: 'math_random_int',
 					inputs: {
-            FROM: {
-      	      block: {
-                type: 'math_number',
-                fields: {
-                  NUM: 1
-                },
-              },
-            },
-            TO: {
-              block: {
-                type: 'math_number',
-                fields: {
-                  NUM: 100
-                },
-              },
-            },
-          },
-        },
+						FROM: {
+							block: {
+								type: 'math_number',
+								fields: {
+								NUM: 1
+								},
+							},
+						},
+						TO: {
+							block: {
+								type: 'math_number',
+								fields: {
+								NUM: 100
+								},
+							},
+						},
+          			},
+        		},
 				{
 					kind: 'block',
 					type: 'abs'
 				},
-      ],
+				{
+					kind: 'block',
+					type: 'init_math'
+				},
+				{
+					kind: 'block',
+					type: 'sin',
+				},
+      		],
 		},
 		{
 			kind: 'category',
@@ -326,7 +334,11 @@ var toolbox = {
 				},
 				{
 					kind: 'block',
-					type: 'gpio_pwm_ctl',
+					type: 'gpio_pwm_ctl_hw',
+				},
+				{
+					kind: 'block',
+					type: 'gpio_pwm_ctl_sw',
 				},
 				{
 					kind: 'block',
