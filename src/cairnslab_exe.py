@@ -144,8 +144,9 @@ def detect_i2c():
 if args.camera:
     from picamera2 import Picamera2
     import cv2
+    from libcamera import Transform
     picam2 = Picamera2()
-    picam2.configure(picam2.create_video_configuration(main={"size": (420, 315)}))
+    picam2.configure(picam2.create_video_configuration(main={"size": (420, 315)}, transform=Transform(vflip=True, hflip=True)))
     picam2.start()
 
     def generate_frames():
