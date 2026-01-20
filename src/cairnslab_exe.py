@@ -22,6 +22,12 @@ from clab_packages import ctl_bluetooth as myblue
 from clab_packages import ctl_gpio as mygpio
 from multiprocessing import Process, Queue
 import subprocess
+import argparse
+
+# arg analysis
+parser = argparse.ArgumentParser()
+parser.add_argument('--camera', action='store_true', help='カメラモードを有効にする')
+args = parser.parse_args()
 
 # Set up Web Server
 app = Flask(__name__)
@@ -133,6 +139,32 @@ def detect_i2c():
     except subprocess.CalledProcessError as e:
         result = f"Error: {e.output}"
     return jsonify({"result": result})
+
+# Set up camera and streaming
+if args.camera:
+    from picamera2 import Picamera2
+    import cv2
+    from libcamera import Transform
+    picam2 = Picamera2()
+    picam2.configure(picam2.create_video_configuration(main={"size": (420, 315)}, transform=Transform(vflip=True, hflip=True)))
+    picam2.start()
+
+    def generate_frames():
+        while True:
+            # Capture frame-by-frame
+            frame = picam2.capture_array()
+            # Convert to JPEG format
+            ret, buffer = cv2.imencode('.jpg', frame)
+            frame = buffer.tobytes()
+            # Yield the frame in byte format to the browser
+            yield (b'--frame\r\n'
+                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+
+    @app.route('/free_boad')
+    def video_feed():
+        return Response(generate_frames(),
+                        mimetype='multipart/x-mixed-replace; boundary=frame')
+
 
 if __name__ == '__main__':
 
